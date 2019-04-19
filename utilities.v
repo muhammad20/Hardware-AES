@@ -1,8 +1,8 @@
 
-module Mul(d,a,b);
+module Mul(out,a,b);
 input [7:0] a;
 input [7:0] b;
-output [7:0] d;
+output [7:0] out;
 
 reg [7:0] temp0;
 reg [7:0] temp1;
@@ -28,8 +28,7 @@ wire [7:0] temp_x2;
 wire [7:0] temp_x3;
 wire [7:0] temp_x4;
 wire [7:0] temp_x5;
-wire [7:0] temp_x6;
-wire [7:0] temp_x7;
+
 
 
 assign temp_x01 = a;
@@ -95,7 +94,7 @@ eightbitxor x2 (temp_x2, temp4, temp5);
 eightbitxor x3 (temp_x3, temp6, temp7);
 eightbitxor x4 (temp_x4, temp_x0, temp_x1);
 eightbitxor x5 (temp_x5, temp_x2, temp_x3);
-eightbitxor x6 (temp_x6, temp_x4, temp_x5);
+eightbitxor x6 (out, temp_x4, temp_x5);
 
 
 endmodule
