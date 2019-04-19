@@ -2,44 +2,50 @@
 module MixColumns(prevState, nextState);
 input  [127:0]prevState ;
 output [127:0] nextState ;
-wire [7:0] s [3:0][3:0];
-wire [7:0] sNew [3:0][3:0];
+wire [7:0] s [0:3][0:3];
+wire [7:0] sNew[ 0:3][0:3];
 wire [3:0] temp [20:0];
 
 // Construct the 2D state array
-assign s[0][0] = prevState[7:0];
-assign s[0][1] = prevState[15:8];
-assign s[0][2] = prevState[23:16];
-assign s[0][3] = prevState[31:24];
-assign s[1][0] = prevState[39:32];
-assign s[1][1] = prevState[47:40];
-assign s[1][2] = prevState[55:48];
-assign s[1][3] = prevState[63:56];
-assign s[2][0] = prevState[71:64];
-assign s[2][1] = prevState[79:72];
-assign s[2][2] = prevState[87:80];
-assign s[2][3] = prevState[95:88];
-assign s[3][0] = prevState[103:96];
-assign s[3][1] = prevState[111:104];
-assign s[3][2] = prevState[119:112];
-assign s[3][3] = prevState[127:120];
-/*
-byteMul(temp[0], s[0][0],1'd2);
-byteMul(temp[1], s[1][0],1'd3);
-xor( sNew[0][0], temp[0], temp[1], s[2][0], s[3][0] );
+assign s[3][3] = prevState[7:0];
+assign s[3][2] = prevState[15:8];
+assign s[3][1] = prevState[23:16];
+assign s[3][0] = prevState[31:24];
+assign s[2][3] = prevState[39:32];
+assign s[2][2] = prevState[47:40];
+assign s[2][1] = prevState[55:48];
+assign s[2][0] = prevState[63:56];
+assign s[1][3] = prevState[71:64];
+assign s[1][2] = prevState[79:72];
+assign s[1][1] = prevState[87:80];
+assign s[1][0] = prevState[95:88];
+assign s[0][3] = prevState[103:96];
+assign s[0][2] = prevState[111:104];
+assign s[0][1] = prevState[119:112];
+assign s[0][0] = prevState[127:120];
 
- byteMul(temp[2], s[1][0],1'd2);
- byteMul(temp[3], s[2][0],1'd3);
-xor( sNew[1][0], temp[2], temp[3], s[0][0], s[3][0] );
+wire [7:0] temp1;
+wire [7:0] temp2;
+wire [7:0] temp3;
+wire [7:0] temp4;
+wire [7:0] temp5;
+wire [7:0] temp6;
+wire [7:0] temp7;
 
- byteMul(temp[4], s[0][0],1'd2);
- byteMul(temp[5], s[1][0],1'd3);
-xor( s[2][0], temp[4], temp[5], s[0][0], s[1][0] );
+Mul m1 (temp1,s[0][0], 8'h2);
+Mul m2 (temp2,s[1][0], 8'h3);
+eightbitxor m3 (temp3, temp1, temp2);
+eightbitxor m4 (temp4, s[2][0], s[3][0]); 
+eightbitxor m5 (sNew[0][0], temp3, temp4); 
 
- byteMul(temp[6], s[3][0],1'd2);
- byteMul(temp[7], s[0][0],1'd3);
-xor( s[3][0], temp[6], temp[7], s[2][0], s[1][0] );
-*/
+Mul m6 (temp5,s[1][0], 8'h2);
+Mul m7 (temp6,s[2][0], 8'h3);
+eightbitxor m8 (temp7, temp5, temp6);
+eightbitxor m9 (temp8, s[0][0], s[3][0]); 
+eightbitxor m10 (sNew[1][0], temp7, temp8);
+
+
+
 
 
 endmodule
