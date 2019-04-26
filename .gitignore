@@ -3,3 +3,6 @@
 **/
 *.bak
 *.wlf
+*.qpf
+*.qsf
+*.qws
