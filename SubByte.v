@@ -86,7 +86,7 @@ assign S_box[1][13] = 8'ha4;
 assign S_box[1][14] = 8'h72;
 assign S_box[1][15] = 8'hc0;
 
-assign S_box[2][0] = 8'h67;
+assign S_box[2][0] = 8'hb7;
 assign S_box[2][1] = 8'hfd;
 assign S_box[2][2] = 8'h93;
 assign S_box[2][3] = 8'h26;
