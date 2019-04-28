@@ -1,10 +1,11 @@
 
-module MixColumns(prevState, nextState);
+
+module InvMixColumns(prevState, nextState);
 input  [127:0]prevState ;
 output [127:0] nextState ;
 wire [7:0] s [0:3][0:3];
 wire [7:0] sNew[ 0:3][0:3];
-wire [7:0] temp [0:3][0:15];
+wire [7:0] temp [0:3][0:23];
 
 // Construct the 2D state array
 assign s[3][3] = prevState[7:0];
@@ -82,29 +83,40 @@ eightbitxor m40 (sNew[3][1], temp31, temp32); */
 genvar i;
 generate 
 for ( i=0; i<4; i = i+1) begin
-	Mul mx1 (temp[i][0],s[0][i], 8'h2);
-	Mul mx2 (temp[i][1],s[1][i], 8'h3);
-	eightbitxor mx3 (temp[i][2], temp[i][0], temp[i][1]);
-	eightbitxor mx4 (temp[i][3], s[2][i], s[3][i]); 
-	eightbitxor mx5 (sNew[0][i], temp[i][2], temp[i][3]); 
+	Mul mx1 (temp[i][0],s[0][i], 8'h0e);
+	Mul mx2 (temp[i][1],s[1][i], 8'h0b);
+	Mul mx3 (temp[i][2],s[2][i], 8'h0d);
+	Mul mx4 (temp[i][3],s[3][i], 8'h09);
+	eightbitxor mx5 (temp[i][4], temp[i][0], temp[i][1]);
+	eightbitxor mx6 (temp[i][5], temp[i][2], temp[i][3]); 
+	eightbitxor mx7 (sNew[0][i], temp[i][4], temp[i][5]);
 
-	Mul mx6 (temp[i][4],s[1][i], 8'h2);
-	Mul mx7 (temp[i][5],s[2][i], 8'h3);
-	eightbitxor mx8 (temp[i][6], temp[i][4], temp[i][5]);
-	eightbitxor mx9 (temp[i][7], s[0][i], s[3][i]); 
-	eightbitxor mx10 (sNew[1][i], temp[i][6], temp[i][7]);
+	Mul mx8 (temp[i][6],s[0][i], 8'h09);
+	Mul mx9 (temp[i][7],s[1][i], 8'h0e);
+	Mul mx10 (temp[i][8],s[2][i], 8'h0b);
+	Mul mx11 (temp[i][9],s[3][i], 8'h0d);
+	eightbitxor mx12 (temp[i][10], temp[i][6], temp[i][7]);
+	eightbitxor mx13 (temp[i][11], temp[i][8], temp[i][9]); 
+	eightbitxor mx14 (sNew[1][i], temp[i][10], temp[i][11]); 
+
+
+	Mul mx15 (temp[i][12],s[0][i], 8'h0d);
+	Mul mx16 (temp[i][13],s[1][i], 8'h09);
+	Mul mx17 (temp[i][14],s[2][i], 8'h0e);
+	Mul mx18 (temp[i][15],s[3][i], 8'h0b);
+	eightbitxor mx19 (temp[i][16], temp[i][12], temp[i][13]);
+	eightbitxor mx20 (temp[i][17], temp[i][14], temp[i][15]); 
+	eightbitxor mx21 (sNew[2][i], temp[i][16], temp[i][17]);
+
+	Mul mx22 (temp[i][18],s[0][i], 8'h0b);
+	Mul mx23 (temp[i][19],s[1][i], 8'h0d);
+	Mul mx24 (temp[i][20],s[2][i], 8'h09);
+	Mul mx25 (temp[i][21],s[3][i], 8'h0e);
+	eightbitxor mx26 (temp[i][22], temp[i][18], temp[i][19]);
+	eightbitxor mx27 (temp[i][23], temp[i][20], temp[i][21]); 
+	eightbitxor mx28 (sNew[3][i], temp[i][22], temp[i][23]);  
+
 	
-	Mul mx11 (temp[i][8] ,s[2][i], 8'h2);
-	Mul mx12 (temp[i][9] ,s[3][i], 8'h3);
-	eightbitxor mx13 (temp[i][10], temp[i][8], temp[i][9]);
-	eightbitxor mx14 (temp[i][11], s[0][i], s[1][i]); 
-	eightbitxor mx15 (sNew[2][i], temp[i][10], temp[i][11]);
-
-	Mul mx16 (temp[i][12] ,s[3][i], 8'h2);
-	Mul mx17 (temp[i][13] ,s[0][i], 8'h3);
-	eightbitxor mx18 (temp[i][14], temp[i][12], temp[i][13]);
-	eightbitxor mx19 (temp[i][15], s[2][i], s[1][i]); 
-	eightbitxor mx20 (sNew[3][i], temp[i][14], temp[i][15]);
 
 
 end
@@ -126,5 +138,6 @@ assign  nextState[103:96] = sNew[3][0];
 assign  nextState[111:104] = sNew[2][0];
 assign  nextState[119:112] = sNew[1][0];
 assign  nextState[127:120] = sNew[0][0];
+
 
 endmodule
