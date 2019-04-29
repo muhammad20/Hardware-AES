@@ -1,0 +1,117 @@
+vsim -gui work.encryption
+# //  ModelSim PE Student Edition 10.4a Apr  7 2015 
+# //
+# //  Copyright 1991-2015 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //  THIS DOCUMENT CONTAINS TRADE SECRETS AND COMMERCIAL OR FINANCIAL
+# //  INFORMATION THAT ARE PRIVILEGED, CONFIDENTIAL, AND EXEMPT FROM
+# //  DISCLOSURE UNDER THE FREEDOM OF INFORMATION ACT, 5 U.S.C. SECTION 552.
+# //  FURTHERMORE, THIS INFORMATION IS PROHIBITED FROM DISCLOSURE UNDER
+# //  THE TRADE SECRETS ACT, 18 U.S.C. SECTION 1905.
+# //
+# // NOT FOR CORPORATE OR PRODUCTION USE.
+# // THE ModelSim PE Student Edition IS NOT A SUPPORTED PRODUCT.
+# // FOR HIGHER EDUCATION PURPOSES ONLY
+# //
+# vsim -gui 
+# Start time: 12:09:27 on Apr 29,2019
+# Loading work.encryption
+# Loading work.keyexpansion
+# Loading work.mux2x1
+# Loading work.mux4x1
+# Loading work.RotWord
+# Loading work.SubWord
+# Loading work.SubByte
+# Loading work.xor32
+# Loading work.AddRoundKey2
+# Loading work.ShiftRows
+# Loading work.MixColumns
+# Loading work.eightbitxor
+# Loading work.Mul
+# Loading work.xtime
+# ** Warning: (vsim-3015) E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/SubWord.v(6): [PCDPC] - Port size (128) does not match connection size (32) for port 'prevState'. The port definition is at: E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/SubByte.v(2).
+#    Time: 0 ns  Iteration: 0  Instance: /encryption/kexp/sub/s1 File: E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/SubByte.v
+# ** Warning: (vsim-3015) E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/SubWord.v(6): [PCDPC] - Port size (128) does not match connection size (32) for port 'nextState'. The port definition is at: E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/SubByte.v(3).
+#    Time: 0 ns  Iteration: 0  Instance: /encryption/kexp/sub/s1 File: E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/SubByte.v
+# ** Warning: (vsim-3015) E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/SubWord.v(6): [PCDPC] - Port size (128) does not match connection size (32) for port 'prevState'. The port definition is at: E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/SubByte.v(2).
+#    Time: 0 ns  Iteration: 0  Instance: /encryption/kexp/sub2/s1 File: E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/SubByte.v
+# ** Warning: (vsim-3015) E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/SubWord.v(6): [PCDPC] - Port size (128) does not match connection size (32) for port 'nextState'. The port definition is at: E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/SubByte.v(3).
+#    Time: 0 ns  Iteration: 0  Instance: /encryption/kexp/sub2/s1 File: E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/SubByte.v
+# ** Warning: (vsim-3015) E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/encryption.v(34): [PCDPC] - Port size (5) does not match connection size (4) for port 'round'. The port definition is at: E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/AddRoundKey2.v(2).
+#    Time: 0 ns  Iteration: 0  Instance: /encryption/asdjkb File: E:/CUFE CHS Materials/Senior 1/Semester 8/Logic 2/Hardware-AES/AddRoundKey2.v
+add wave -position insertpoint  \
+sim:/encryption/w \
+sim:/encryption/s5 \
+sim:/encryption/s4 \
+sim:/encryption/s3 \
+sim:/encryption/s2 \
+sim:/encryption/s1 \
+sim:/encryption/s \
+sim:/encryption/rst \
+sim:/encryption/plainText \
+sim:/encryption/key \
+sim:/encryption/err \
+sim:/encryption/done \
+sim:/encryption/counter \
+sim:/encryption/clk \
+sim:/encryption/cipherText \
+sim:/encryption/Nr \
+sim:/encryption/Nk
+force -freeze sim:/encryption/key 256'h000102030405060708090a0b0c0d0e0f1011121314151617 0
+force -freeze sim:/encryption/plainText 128'h00112233445566778899aabbccddeeff 0
+force -freeze sim:/encryption/clk 1 0, 0 {50 ns} -r 100
+force -freeze sim:/encryption/Nr 4'hc 0
+force -freeze sim:/encryption/Nk 4'h6 0
+force -freeze sim:/encryption/rst 1'h1 0
+run
+force -freeze sim:/encryption/rst 1'h0 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+
