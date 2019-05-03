@@ -60,7 +60,7 @@ assign en = (counter >= Nk) ? 1'b1 : 1'b0;
 
 assign done = (counter >= 4 * (Nk + 6 + 1)) ? 1'b1 : 1'b0;
 
-assign err = (~(Nk[3] ^ Nk[2]) | Nk[2] | (Nk[3] & Nk[1])) ? 1'b1 : 1'b0;
+assign err = (~(Nk[3] ^ Nk[2]) | Nk[0] | (Nk[3] & Nk[1])) ? 1'b1 : 1'b0;
 
 // ------------ if Counter mod Nk == 0
 RotWord rot(temp_op, temp_rot_fixed);
