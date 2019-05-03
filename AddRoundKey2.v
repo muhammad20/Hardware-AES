@@ -8,15 +8,15 @@ wire [31:0] wo [0:59];
 output [127:0] nextState ;
 
 genvar j;
-generate 
-for ( j=0; j<60; j = j+1) begin
+generate
+for ( j=0; j<60; j = j+1) begin : getWs
 	assign wo [j] = w[(j+1)*32-1 : j*32];
 end
 endgenerate
 
 genvar i;
-generate 
-for ( i=0; i<16; i = i+4) begin
+generate
+for ( i=0; i<16; i = i+4) begin : eightbitxors
 	eightbitxor mx (nextState[8*(i+1)-1 : i*8], prevState[8*(i+1)-1 : i*8], wo[(round+1)*4-i/4-1][7:0]);
 	eightbitxor mx2 (nextState[8*(i+2)-1 : 8*(i+1)], prevState[8*(i+2)-1 : 8*(i+1)], wo[(round+1)*4-i/4-1][15:8]);
 	eightbitxor mx3 (nextState[8*(i+3)-1 : 8*(i+2)], prevState[8*(i+3)-1 : 8*(i+2)], wo[(round+1)*4-i/4-1][23:16]);

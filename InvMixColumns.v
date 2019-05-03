@@ -82,7 +82,7 @@ eightbitxor m40 (sNew[3][1], temp31, temp32); */
 
 genvar i;
 generate 
-for ( i=0; i<4; i = i+1) begin
+for ( i=0; i<4; i = i+1) begin : InvMixes
 	Mul mx1 (temp[i][0],s[0][i], 8'h0e);
 	Mul mx2 (temp[i][1],s[1][i], 8'h0b);
 	Mul mx3 (temp[i][2],s[2][i], 8'h0d);

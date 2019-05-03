@@ -80,8 +80,8 @@ eightbitxor m39 (temp32, s[2][1], s[1][1]);
 eightbitxor m40 (sNew[3][1], temp31, temp32); */
 
 genvar i;
-generate 
-for ( i=0; i<4; i = i+1) begin
+generate
+for ( i=0; i<4; i = i+1) begin : mixes
 	Mul mx1 (temp[i][0],s[0][i], 8'h2);
 	Mul mx2 (temp[i][1],s[1][i], 8'h3);
 	eightbitxor mx3 (temp[i][2], temp[i][0], temp[i][1]);
