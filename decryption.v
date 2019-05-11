@@ -15,6 +15,7 @@ wire err;
 wire done;
 wire [127:0] s;
 reg [127:0] s1;
+wire [127:0] sss;
 wire [127:0] s2;
 wire [127:0] s3;
 wire [127:0] s4;
@@ -26,27 +27,36 @@ reg [3:0] counter;
 keyexpansion kexp (key, w, Nk, clk, rst, done, err);
 
 
-AddRoundKey2 ss(plainText, s, w, Nr);
+//AddRoundKey2 ss(plainText, s, w, Nr);
 
 InvShiftRows sdas(s1,s2);
 InvSubByte adda(s2,s3);
-AddRoundKey2 asdjkb(s3,s4, w, counter);
+AddRoundKey2 asdjkb(sss,s4, w, counter);
 InvMixColumns lkjh(s4, s5);
 
-AddRoundKey2 asdjskb(s3, s6, w, counter);
+//AddRoundKey2 asdjskb(s3, s6, w, counter);
+
+assign sss = (counter ==Nr) ? plainText :
+	s3;
 
 always@(posedge clk)	begin
 	
-	if(rst)	begin
-		counter =  Nr;
+	//if(rst)	begin
+	//	counter =  Nr;
 		
-		end
-	if(done)	begin
-			s1 = (counter<Nr) ? s5: s;
-			counter = counter -1;
-			end
-	if(counter==4'b1111)	begin
-			cipherText = s6;
+	//	end
+	//if(done)	begin
+	//		s1 = (counter<Nr) ? s5: s;
+		//	counter = counter -1;
+		//	end
+	s1 <= (counter ==Nr) ? s4 :
+	 s5;
+	counter <= (rst) ? Nr :
+		(done) ? counter -1 :
+		Nr;
+
+	if(counter==0)	begin
+			cipherText = s4;
 			end
 			else	cipherText = 0;
 end
